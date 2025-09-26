@@ -1,4 +1,4 @@
-challenges:name: Update Challenges List
+name: Update Challenges List
 
 on:
   push:
