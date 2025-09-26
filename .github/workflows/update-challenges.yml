@@ -1,3 +1,6 @@
+permissions:
+  contents: write
+
 name: Update Challenges List
 
 on:
@@ -15,7 +18,7 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
       with:
-        token: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ secrets.PERSONAL_TOKEN }}
         
     - name: Create _data directory
       run: mkdir -p _data
@@ -55,8 +58,8 @@ jobs:
     - name: Commit and push changes
       if: steps.verify-changed-files.outputs.changed == 'true'
       run: |
-        git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+        git config --local user.email "github-actions[bot]@users.noreply.github.com"
         git config --local user.name "github-actions[bot]"
         git add _data/challenges.yml
-        git commit -m "🤖 Auto-update challenges list"
+        git commit -m "🤖auto-update challenges list"
         git push
