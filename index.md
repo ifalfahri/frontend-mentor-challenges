@@ -76,47 +76,8 @@ Below are all the completed challenges in this repository:
 }
 </style>
 
-{%- comment -%}
-Scan for both Jekyll pages and static HTML files to find all challenge folders
-{%- endcomment -%}
-
-{%- comment -%}Get Jekyll pages with front matter{%- endcomment -%}
-{%- assign pages_index = site.pages
-    | where_exp: "p", "p.basename == 'index'"
-    | where_exp: "p", "p.url != '/'"
--%}
-
-{%- comment -%}Get static index.html files without front matter{%- endcomment -%}
-{%- assign static_index = site.static_files
-    | where: "basename", "index"
-    | where: "extname", ".html"
--%}
-
-{%- comment -%}Build list of unique challenge folders{%- endcomment -%}
-{%- assign folders = "" | split: "" -%}
-
-{%- comment -%}Extract folders from Jekyll pages{%- endcomment -%}
-{%- for p in pages_index -%}
-{%- assign segs = p.url | split: "/" -%}
-{%- assign folder = segs[segs.size - 2] -%}
-{%- unless folders contains folder -%}
-{%- assign folders = folders | push: folder -%}
-{%- endunless -%}
-{%- endfor -%}
-
-{%- comment -%}Extract folders from static files{%- endcomment -%}
-{%- for f in static_index -%}
-{%- assign segs = f.path | split: "/" -%}
-{%- assign folder = segs[segs.size - 2] -%}
-{%- unless folders contains folder -%}
-{%- assign folders = folders | push: folder -%}
-{%- endunless -%}
-{%- endfor -%}
-
-{%- assign folders_sorted = folders | sort -%}
-
 <div class="challenge-grid">
-{%- for folder in folders_sorted -%}
+{%- for folder in site.data.challenges.challenges -%}
     {%- assign label = folder
             | replace: "-", " "
             | replace: "_", " "
@@ -130,18 +91,16 @@ Scan for both Jekyll pages and static HTML files to find all challenge folders
     </a>
 {%- endfor -%}
 
-{%- if folders_sorted == empty -%}
+{%- if site.data.challenges.challenges == empty or site.data.challenges.challenges == nil -%}
 <div class="no-challenges">
 🔍 No challenges found yet.<br>
 <small>Add folders with <code>index.html</code> files to get started!</small>
 </div>
 {%- endif -%}
-
 </div>
 
 ---
 
-### 🔗 Links
+### 🤖 Automation
 
-- [Frontend Mentor](https://www.frontendmentor.io) - The source of these challenges
-- [My Profile](https://www.frontendmentor.io/profile/{{ site.github.owner_name | default: "your-username" }}) - See my other solutions
+This page automatically updates when i add new challenge folders! Just push a folder with an `index.html` file and GitHub Actions will detect it within minutes.
