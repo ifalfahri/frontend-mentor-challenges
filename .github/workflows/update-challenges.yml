@@ -66,7 +66,11 @@ jobs:
         else
           echo "changed=false" >> $GITHUB_OUTPUT
         fi
-        
+    
+    - name: Pull latest changes before committing
+      run: |
+        git pull origin main --rebase
+
     - name: Commit and push changes
       if: steps.verify-changed-files.outputs.changed == 'true'
       run: |
