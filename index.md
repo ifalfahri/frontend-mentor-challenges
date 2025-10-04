@@ -20,9 +20,9 @@ Below are all the completed challenges in this repository:
 }
 
 .challenge-card {
-    border: 2px solid #e2e8f0;
+    border: 1px solid #e2e8f0;
     border-radius: 12px;
-    padding: 1.5rem;
+    padding: 1rem;
     transition: all 0.3s ease;
     text-decoration: none;
     display: block;
@@ -31,8 +31,6 @@ Below are all the completed challenges in this repository:
 }
 
 .challenge-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
     border-color: #3b82f6;
     text-decoration: none;
 }
